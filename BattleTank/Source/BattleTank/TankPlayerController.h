@@ -14,7 +14,11 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-public:
+private:
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5;
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.33333;
 	ATank* GetControlledTank() const;
 	void AimTowardsCrosshair();
 	virtual void Tick( float DeltaTime ) override; // Optional having the named input
