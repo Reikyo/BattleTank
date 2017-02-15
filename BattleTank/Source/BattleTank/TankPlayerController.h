@@ -24,4 +24,5 @@ private:
 	virtual void Tick( float DeltaTime ) override; // Optional having the named input
 	virtual void BeginPlay() override;
 	bool GetSightRay(FVector& HitLocation) const; // Return an OUT parameter, true if crosshair hits landscape
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 };
