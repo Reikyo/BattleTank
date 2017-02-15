@@ -19,4 +19,5 @@ public:
 	void AimTowardsCrosshair();
 	virtual void Tick( float DeltaTime ) override; // Optional having the named input
 	virtual void BeginPlay() override;
+	bool GetSightRay(FVector& HitLocation) const; // Return an OUT parameter, true if crosshair hits landscape
 };
