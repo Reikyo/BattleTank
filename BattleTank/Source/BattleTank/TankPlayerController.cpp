@@ -40,7 +40,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; // Out parameter
 	if (GetSightRay(HitLocation)) // Has the "side effect" of causing a line trace
 	{
-//		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *(HitLocation.ToString()))
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *(HitLocation.ToString()))
 	}
 }
 
@@ -50,16 +50,16 @@ bool ATankPlayerController::GetSightRay(FVector& HitLocation) const
 	// Find the crosshair position in (x,y) screen pixel coordinates
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
-	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
+	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation,
+									ViewportSizeY * CrossHairYLocation);
 
 	// Find the crosshair look direction in normalised (x,y,z) game world coordinates
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *(LookDirection.ToString()))
+		GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
 
-//	HitLocation = FVector(1.0);
 	return true;
 }
 
@@ -70,4 +70,21 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 										  ScreenLocation.Y,
 										  CameraWorldLocation,
 										  LookDirection);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + LookDirection * LineTraceRange;
+	if (GetWorld()->LineTraceSingleByChannel(HitResult,
+											 StartLocation,
+											 EndLocation,
+											 ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+	HitLocation = FVector(0);
+	return false;
 }
