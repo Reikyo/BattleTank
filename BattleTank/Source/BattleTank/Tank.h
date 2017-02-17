@@ -17,6 +17,9 @@ public:
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 private:
+	UPROPERTY(EditAnywhere)
+	float LaunchSpeed = 100000.0;
+
 	ATank();
 	virtual void BeginPlay() override;
 	virtual void Tick( float DeltaSeconds ) override;
