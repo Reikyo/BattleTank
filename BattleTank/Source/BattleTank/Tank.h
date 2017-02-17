@@ -13,6 +13,8 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	void AimAt(FVector HitLocation);
+	UFUNCTION(BlueprintCallable, Category = Setup) // Don't put a semicolon after a UFUNCTION declaration!
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 private:
 	ATank();
