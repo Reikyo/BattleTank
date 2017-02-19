@@ -8,11 +8,21 @@
 /**
  * 
  */
-UCLASS()
+// Hide categories from the Blueprint "Details" tab by e.g.:
+UCLASS( meta=(BlueprintSpawnableComponent), hidecategories=("Collision") )
 class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 
 public:
 	void Elevate(float DegreesPerSecond);
+
+private:
+// The "Categor" field provides the Blueprint location in the "Details" tab
+	UPROPERTY(EditAnywhere, Category = Setup)
+	float MaxDegreesPerSecond = 20.0;
+	UPROPERTY(EditAnywhere, Category = Setup)
+	float MinElevationDegrees = 0.0;
+	UPROPERTY(EditAnywhere, Category = Setup)
+	float MaxElevationDegrees = 40.0;
 };
