@@ -19,7 +19,7 @@ public:
 private:
 // The "Categor" field provides the Blueprint location in the "Details" tab
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxDegreesPerSecond = 20.0;
+	float MaxDegreesPerSecond = 5.0;
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MinElevationDegrees = 0.0;
 	UPROPERTY(EditAnywhere, Category = Setup)
