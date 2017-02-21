@@ -25,7 +25,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float LaunchSpeed = 10000.0;
+	float LaunchSpeed = 4000.0;
 
 	ATank();
 	virtual void BeginPlay() override;
