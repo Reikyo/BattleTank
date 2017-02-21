@@ -17,7 +17,7 @@ public:
 	void Elevate(float RelativeSpeed);
 
 private:
-// The "Categor" field provides the Blueprint location in the "Details" tab
+// The "Category" field provides the Blueprint location in the "Details" tab
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxDegreesPerSecond = 5.0;
 	UPROPERTY(EditAnywhere, Category = Setup)
