@@ -33,7 +33,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 								0.0,
 								0.0,
 								ESuggestProjVelocityTraceOption::DoNotTrace);
-	auto Time = GetWorld()->GetTimeSeconds();
+//	auto Time = GetWorld()->GetTimeSeconds();
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();

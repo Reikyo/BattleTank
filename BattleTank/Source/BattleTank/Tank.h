@@ -22,6 +22,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
 	void AimAt(FVector HitLocation);
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 
 private:
 	UPROPERTY(EditAnywhere)
