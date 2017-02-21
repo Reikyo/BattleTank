@@ -13,11 +13,11 @@ class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-	// -1 is max ??? movement, +1 is max ??? movement
+// -1 is max ??? movement, +1 is max ??? movement
 	void Rotate(float RelativeSpeed);
 	
 private:
-	// The "Category" field provides the Blueprint location in the "Details" tab
+// The "Category" field provides the Blueprint location in the "Details" tab
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxDegreesPerSecond = 20.0;
 };

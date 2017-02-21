@@ -22,11 +22,9 @@ private:
 	float LineTraceRange = 1000000.0;
 
 	virtual void BeginPlay() override;
-	virtual void Tick( float DeltaTime ) override; // Optional having the named input
-
-	ATank* GetControlledTank() const;
-
+	virtual void Tick(float DeltaTimeSeconds) override; // Optional having the named input
 	void AimTowardsCrosshair();
+	ATank* GetControlledTank() const;
 	bool GetSightRay(FVector& HitLocation) const; // Return an OUT parameter, true if crosshair hits landscape
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;

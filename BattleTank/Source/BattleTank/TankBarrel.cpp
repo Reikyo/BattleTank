@@ -6,7 +6,7 @@
 
 void UTankBarrel::Elevate(float RelativeSpeed)
 {
-	// Move the barrel the right amount this frame given a max elevation speed and the frame time
+// Move the barrel the right amount this frame given a max elevation speed and the frame time
 	auto RelativeSpeedClamp = FMath::Clamp<float>(RelativeSpeed, -1.0, 1.0);
 	auto ElevationChange = RelativeSpeedClamp * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
 	auto RawNewElevation = RelativeRotation.Pitch + ElevationChange;

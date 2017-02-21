@@ -20,23 +20,15 @@ void ATankPlayerController::BeginPlay()
 	}
 }
 
-void ATankPlayerController::Tick( float DeltaTime )
+void ATankPlayerController::Tick(float DeltaTimeSeconds)
 {
-	Super::Tick( DeltaTime );
+	Super::Tick(DeltaTimeSeconds);
 	AimTowardsCrosshair();
-}
-
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!GetControlledTank())
-	{
-		return;
-	}
+	if (!GetControlledTank()){ return; }
 
 	FVector HitLocation; // Out parameter
 	if (GetSightRay(HitLocation)) // Has the "side effect" of causing a line trace
@@ -45,16 +37,21 @@ void ATankPlayerController::AimTowardsCrosshair()
 	}
 }
 
+ATank* ATankPlayerController::GetControlledTank() const
+{
+	return Cast<ATank>(GetPawn());
+}
+
 // Get world location of linetrace through crosshair, true if hits the landscape
 bool ATankPlayerController::GetSightRay(FVector& HitLocation) const
 {
-	// Find the crosshair position in (x,y) screen pixel coordinates
+// Find the crosshair position in (x,y) screen pixel coordinates
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation,
 									ViewportSizeY * CrossHairYLocation);
 
-	// Find the crosshair look direction in normalised (x,y,z) game world coordinates
+// Find the crosshair look direction in normalised (x,y,z) game world coordinates
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
@@ -86,6 +83,9 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitLocation = HitResult.Location;
 		return true;
 	}
-	HitLocation = FVector(0);
-	return false;
+	else
+	{
+		HitLocation = FVector(0);
+		return false;
+	}
 }

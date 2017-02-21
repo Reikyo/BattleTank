@@ -18,9 +18,7 @@ public:
 	ATank* GetPlayerTank() const;
 
 private:
-//	AActor PlayerPawn;
 	virtual void BeginPlay() override;
-	virtual void Tick( float DeltaSeconds ) override;
-
+	virtual void Tick(float DeltaTimeSeconds) override;
 	void AimTowardsPlayer();
 };
