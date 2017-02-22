@@ -7,7 +7,7 @@
 
 
 // Hide categories from the Blueprint "Details" tab by e.g.:
-UCLASS( meta=(BlueprintSpawnableComponent), hidecategories=("Collision") )
+UCLASS(meta=(BlueprintSpawnableComponent))//, hidecategories=("Collision"))
 class BATTLETANK_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
