@@ -29,6 +29,9 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 4000.0;
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float ReloadTimeSeconds = 3.0;
+	double LastFireTime = 0.0;
 //	UPROPERTY(EditAnywhere, Category = Setup)
 //	UClass* ProjectileBlueprint = nullptr; // Chose NOT to use this way of defining this variable here, as it lets the designer choose any class at all within Blueprint, which is too much choice and can lead to crashes if the wrong class is chosen
 	UPROPERTY(EditAnywhere, Category = Setup)
