@@ -3,26 +3,33 @@
 #include "BattleTank.h"
 #include "Projectile.h"
 
+// Note that we do not need to create a "ProjectileMovementComponent" C++ class, as we had to do for the similar addition of "TankAimingComponent" in the Tank codes, as "ProjectileMovementComponent" is an existing Unreal class
+
 
 // Sets default values
 AProjectile::AProjectile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+// Set this actor to call Tick() every frame. You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("MovementComponent"));
+	ProjectileMovementComponent->bAutoActivate = false;
 }
 
-// Called when the game starts or when spawned
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void AProjectile::Tick( float DeltaTime )
+void AProjectile::Tick(float DeltaTimeSeconds)
 {
-	Super::Tick( DeltaTime );
-
+	Super::Tick(DeltaTimeSeconds);
 }
 
+void AProjectile::LaunchProjectile(float Speed)
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Projectile fires"), Time)
+	ProjectileMovementComponent->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
+	ProjectileMovementComponent->Activate();
+	return;
+}

@@ -5,21 +5,21 @@
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
+// Note that we do not need to create a "ProjectileMovementComponent" C++ class, as we had to do for the similar addition of "TankAimingComponent" in the Tank codes, as "ProjectileMovementComponent" is an existing Unreal class
+
+
 UCLASS()
 class BATTLETANK_API AProjectile : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
+
+public:
 	AProjectile();
-
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	// Called every frame
-	virtual void Tick( float DeltaSeconds ) override;
+	virtual void Tick(float DeltaTimeSeconds) override;
+	void LaunchProjectile(float Speed);
 
-	
-	
+protected:
+	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
+
 };
