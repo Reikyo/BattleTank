@@ -18,7 +18,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 	UFUNCTION(BlueprintCallable, Category = Input)
-	void IntendMove(float Throw);
+	void IntendMoveForwardsBackwards(float Throw);
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void IntendMoveLeft(float Throw);
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void IntendMoveRight(float Throw);
 
 private:
 	UTankTrack* LeftTrack = nullptr;
