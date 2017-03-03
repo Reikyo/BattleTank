@@ -17,6 +17,6 @@ public:
 	
 private:
 // The "Category" field provides the Blueprint location in the "Details" tab
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float MaxDegreesPerSecond = 20.0;
 };

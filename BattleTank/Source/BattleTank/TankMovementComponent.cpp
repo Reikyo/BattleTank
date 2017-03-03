@@ -11,6 +11,17 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 	RightTrack = RightTrackToSet;
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto AIForwardVectorNormalCurrent = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIForwardVectorNormalIntend = MoveVelocity.GetSafeNormal();
+	IntendMoveForwardsBackwards(FVector::DotProduct(AIForwardVectorNormalCurrent,
+													AIForwardVectorNormalIntend));
+	IntendMoveRight(FVector::CrossProduct(AIForwardVectorNormalCurrent,
+										  AIForwardVectorNormalIntend).Z);
+//	UE_LOG(LogTemp, Warning, TEXT("TankName: %s MoveVelocity: %s"), *(GetOwner()->GetName()), *(MoveVelocity.ToString()))
+}
+
 void UTankMovementComponent::IntendMoveForwardsBackwards(float Throw)
 {
 	if (!LeftTrack || !RightTrack) { return; }
@@ -30,15 +41,4 @@ void UTankMovementComponent::IntendMoveRight(float Throw)
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
-}
-
-void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
-{
-	auto AIForwardVectorNormalCurrent = GetOwner()->GetActorForwardVector().GetSafeNormal();
-	auto AIForwardVectorNormalIntend = MoveVelocity.GetSafeNormal();
-	IntendMoveForwardsBackwards(FVector::DotProduct(AIForwardVectorNormalCurrent,
-													AIForwardVectorNormalIntend));
-	IntendMoveRight(FVector::CrossProduct(AIForwardVectorNormalCurrent,
-										  AIForwardVectorNormalIntend).Z);
-	UE_LOG(LogTemp, Warning, TEXT("TankName: %s MoveVelocity: %s"), *(GetOwner()->GetName()), *(MoveVelocity.ToString()))
 }
