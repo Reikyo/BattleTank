@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #pragma once
 
 #include "GameFramework/PlayerController.h"
-#include "TankPlayerController.generated.h" // Must be the last include
+#include "TankPlayerController.generated.h"
 
 class ATank;
 

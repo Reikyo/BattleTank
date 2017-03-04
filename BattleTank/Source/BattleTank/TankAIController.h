@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #pragma once
 
 #include "AIController.h"
-#include "TankAIController.generated.h" // Must be the last include
+#include "TankAIController.generated.h"
 
 class ATank;
 

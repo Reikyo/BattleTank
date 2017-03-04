@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #pragma once
 
@@ -16,7 +16,6 @@ public:
 	void Elevate(float RelativeSpeed);
 
 private:
-// The "Category" field provides the Blueprint location in the "Details" tab
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float MaxDegreesPerSecond = 5.0;
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

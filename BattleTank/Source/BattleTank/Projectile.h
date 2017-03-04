@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #pragma once
 
@@ -21,5 +21,4 @@ public:
 
 protected:
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
-
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #include "BattleTank.h"
 #include "TankTrack.h"
@@ -7,6 +7,7 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
+	if (!LeftTrackToSet || !RightTrackToSet) { return; }
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
@@ -19,7 +20,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 													AIForwardVectorNormalIntend));
 	IntendMoveRight(FVector::CrossProduct(AIForwardVectorNormalCurrent,
 										  AIForwardVectorNormalIntend).Z);
-//	UE_LOG(LogTemp, Warning, TEXT("TankName: %s MoveVelocity: %s"), *(GetOwner()->GetName()), *(MoveVelocity.ToString()))
 }
 
 void UTankMovementComponent::IntendMoveForwardsBackwards(float Throw)

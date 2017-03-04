@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #include "BattleTank.h"
 #include "TankBarrel.h"
@@ -12,6 +12,5 @@ void UTankBarrel::Elevate(float RelativeSpeed)
 	auto RawNewElevation = RelativeRotation.Pitch + ElevationChange;
 // Note that "<float>" in the following is not essential, but it implicitly lets the method know what to expect and so removes the chance that some unwanted default behaviour occurs
 	auto RawNewElevationClamp = FMath::Clamp<float>(RawNewElevation, MinElevationDegrees, MaxElevationDegrees);
-//	UE_LOG(LogTemp, Warning, TEXT("RelativeRotation.Pitch: %f ElevationChange: %f RawNewElevationClamp: %f"), RelativeRotation.Pitch, ElevationChange, RawNewElevationClamp)
 	SetRelativeRotation(FRotator(RawNewElevationClamp, 0.0, 0.0));
 }

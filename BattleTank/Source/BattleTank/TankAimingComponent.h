@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Darren Temple
 
 #pragma once
 
@@ -13,8 +13,8 @@ enum class EFiringState : uint8
 	Locked
 };
 
-class UTankBarrel;
 class UTankTurret;
+class UTankBarrel;
 
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
@@ -22,17 +22,15 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-// Sets default values for this component's properties
-	UTankAimingComponent();
-
+public:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialise(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
 	void AimAt(FVector HitLocation, float LaunchSpeed);
-	void SetTurretReference(UTankTurret* TurretToSet);
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 private:
 	UTankTurret* Turret = nullptr;
 	UTankBarrel* Barrel = nullptr;
+	UTankAimingComponent();
 	void MoveBarrelTowards(FVector AimDirection);
 
 protected:
