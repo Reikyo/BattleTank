@@ -17,7 +17,7 @@ void ATankAIController::Tick(float DeltaTimeSeconds)
 	auto AIPawn = Cast<ATank>(GetPawn());
 	auto PlayerPawn = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	if (AIPawn && PlayerPawn)
+	if (ensure(AIPawn && PlayerPawn))
 	{
 		MoveToActor(PlayerPawn, 3000.0);
 		AIPawn->AimAt(PlayerPawn->GetActorLocation());
