@@ -1,7 +1,7 @@
 // Copyright Darren Temple
 
 #include "BattleTank.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.h"
 
 
@@ -14,13 +14,14 @@ void ATankAIController::Tick(float DeltaTimeSeconds)
 {
 	Super::Tick(DeltaTimeSeconds);
 
-	auto AIPawn = Cast<ATank>(GetPawn());
-	auto PlayerPawn = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto AIPawn = GetPawn();
+	if (!ensure(AIPawn)) { return; }
+	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!ensure(PlayerPawn)) { return; }
+	auto AimingComponent = AIPawn->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
-	if (ensure(AIPawn && PlayerPawn))
-	{
-		MoveToActor(PlayerPawn, 3000.0);
-		AIPawn->AimAt(PlayerPawn->GetActorLocation());
-		AIPawn->Fire();
-	}
+	MoveToActor(PlayerPawn, 3000.0);
+	AimingComponent->AimAt(PlayerPawn->GetActorLocation());
+//	AIPawn->Fire();
 }
