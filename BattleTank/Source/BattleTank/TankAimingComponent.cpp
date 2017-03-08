@@ -90,6 +90,11 @@ bool UTankAimingComponent::IsBarrelMoving()
 	return bIsBarrelMoving;
 }
 
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
+
 void UTankAimingComponent::Fire()
 {
 	if (FiringState != EFiringState::Reloading)

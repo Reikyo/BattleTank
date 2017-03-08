@@ -29,6 +29,7 @@ public:
 	void AimAt(FVector HitLocation);
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
+	EFiringState GetFiringState() const;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
