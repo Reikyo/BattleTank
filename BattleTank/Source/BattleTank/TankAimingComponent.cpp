@@ -20,7 +20,11 @@ void UTankAimingComponent::BeginPlay()
 
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeSeconds)
+	if (AmmoCount == 0)
+	{
+		FiringState = EFiringState::AmmoGone;
+	}
+	else if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeSeconds)
 	{
 		FiringState = EFiringState::Reloading;
 	}
@@ -95,9 +99,14 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
+int UTankAimingComponent::GetAmmoCount() const
+{
+	return AmmoCount;
+}
+
 void UTankAimingComponent::Fire()
 {
-	if (FiringState != EFiringState::Reloading)
+	if ((FiringState == EFiringState::Locked) || (FiringState == EFiringState::Aiming))
 	{
 		if (!ensure(Barrel) || !ensure(ProjectileBlueprint)) { return; }
 
@@ -106,6 +115,7 @@ void UTankAimingComponent::Fire()
 							Barrel->GetSocketLocation(FName("Projectile")),
 							Barrel->GetSocketRotation(FName("Projectile")));
 		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+		AmmoCount -= 1;
 	}
-	LastFireTime = FPlatformTime::Seconds();
 }

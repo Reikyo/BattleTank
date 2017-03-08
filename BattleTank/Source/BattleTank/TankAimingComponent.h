@@ -10,7 +10,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	AmmoGone
 };
 
 class UTankTurret;
@@ -30,6 +31,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 	EFiringState GetFiringState() const;
+	int GetAmmoCount() const;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
@@ -53,4 +55,6 @@ private:
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	int AmmoCount = 3;
 };
