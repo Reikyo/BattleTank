@@ -9,14 +9,25 @@ UTankTrack::UTankTrack()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
+void UTankTrack::BeginPlay()
+{
+	Super::BeginPlay();
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+}
+
 void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 // Find the sideways slippage speed and the force required to bring the slippage speed to zero in DeltaTime. Note that this code will run once per track, so the applied force with each method call is half of the total required.
 	auto SlippageSpeed = FVector::DotProduct(GetComponentVelocity(), GetRightVector());
 	auto CorrectionAcceleration = -1.0 * (SlippageSpeed / DeltaTime) * GetRightVector();
-	auto TankRoot = Cast<UStaticMeshComponent>GetOwner()->GetRootComponent();
+	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 	auto CorrectionForce = TankRoot->GetMass() * CorrectionAcceleration;
 	TankRoot->AddForce(CorrectionForce / 2.0);
+}
+
+void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("JumJum"))
 }
 
 void UTankTrack::SetThrottle(float Throttle)
