@@ -28,6 +28,9 @@ private:
 	bool GetSightRay(FVector& HitLocation) const; // Return an OUT parameter, true if crosshair hits landscape
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+	virtual void SetPawn(APawn* InPawn) override;
+	UFUNCTION()
+	void OnPossessedTankDeath();
 
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
